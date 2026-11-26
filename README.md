@@ -176,11 +176,30 @@ cda-engine/
     ├── test_validator.py
     ├── test_order_priority.py
     └── test_matching.py
-```` ``` ````
+```
+
 ## Incremental Workflow
-1. Stream Validation (validator.py): Parse raw_orders.csv, enforce rules and unique IDs, sort valid rows into clean_orders.csv, log rejections to rejected_orders.log, and print summary statistics.
-2. Automated Testing (pytest): Test validation boundaries, empty/malformed inputs, and price time priority using temporary files and unit tests.
-3. Book & Matching Engine (order.py, book.py, matching.py): Model Order and two sided queues with FIFO priority, handle partial/multi level fills and volume conservation, and write trades.csv and book_final_state.txt.
+
+1. **Stream Validation (`validator.py`):** Parse `raw_orders.csv`, enforce rules and unique IDs, sort valid rows into `clean_orders.csv`, log rejections to `rejected_orders.log`, and print summary statistics.
+2. **Automated Testing (`pytest`):** Test validation boundaries, empty/malformed inputs, and price time priority using temporary files and unit tests.
+3. **Book & Matching Engine (`order.py`, `book.py`, `matching.py`):** Model `Order` and two sided queues with FIFO priority, handle partial/multi level fills and volume conservation, and write `trades.csv` and `book_final_state.txt`.
+4. **ZI Microstructure Study (`metrics.py`, `zi_simulation.py`):** Run constrained ZI simulations across horizons $T$ and evaluate VWAP, realized surplus, maximum surplus, and Smith efficiency.
+
+## Usage & Testing
+
+```bash
+pytest -v
+python3 -m src.validator data/raw_orders.csv
+python3 -m src.matching data/incoming_orders.csv
+python3 -m src.zi_simulation --turns 50 200 1000 --seed 42
+```
+
+## Limitations & Notes
+
+* Single instrument scope; no explicit order cancellations or amendments; discrete step timestamps without network latency.
+* Zero intelligence agents have no learning or strategic behavior; run multiple random seeds to evaluate statistical dispersion across horizons $T$.
+* Keep this `README.md` updated incrementally as each module and test suite is completed.
+
 4. ZI Microstructure Study (metrics.py, zi_simulation.py): Run constrained ZI simulations across horizons T and evaluate VWAP, realized surplus, maximum surplus, and Smith efficiency.
 ## Usage & Testing
 pytest -v
