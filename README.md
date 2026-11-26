@@ -201,10 +201,3 @@ python3 -m src.zi_simulation --turns 50 200 1000 --seed 42
 * Keep this `README.md` updated incrementally as each module and test suite is completed.
 
 4. ZI Microstructure Study (metrics.py, zi_simulation.py): Run constrained ZI simulations across horizons T and evaluate VWAP, realized surplus, maximum surplus, and Smith efficiency.
-## Usage & Testing
-pytest -v
-python3 -m src.validator data/raw_orders.csv
-python3 -m src.matching data/incoming_orders.csv
-python3 -m src.zi_simulation --turns 50 200 1000 --seed 42
-
-        
