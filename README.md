@@ -176,7 +176,7 @@ cda-engine/
     ├── test_validator.py
     ├── test_order_priority.py
     └── test_matching.py
-
+```` ``` ````
 ## Incremental Workflow
 1. Stream Validation (validator.py): Parse raw_orders.csv, enforce rules and unique IDs, sort valid rows into clean_orders.csv, log rejections to rejected_orders.log, and print summary statistics.
 2. Automated Testing (pytest): Test validation boundaries, empty/malformed inputs, and price time priority using temporary files and unit tests.
